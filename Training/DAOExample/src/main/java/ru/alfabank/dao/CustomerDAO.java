@@ -5,7 +5,7 @@ import ru.alfabank.pojo.Customer;
 /** DAO для клиента */
 public interface CustomerDAO {
 
-    /** Получить клиента по id */
+    /** Получить клиента по id  */
     public Customer getCustomerById(String id);
     /** Добавить клиента по id */
     public int insertCustomerById(String id);

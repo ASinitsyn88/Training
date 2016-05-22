@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+        xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!-- Версия maven -->
+    <modelVersion>4.0.0</modelVersion>
+    <!-- namespace проекта -->
+    <groupId>ru.alfabank</groupId>
+    <!-- Название war-файла -->
+    <artifactId>ImageDB</artifactId>
+    <!-- Версия проекта(SNAPSHOT - не окончательная версия) -->
+    <version>1.0-SNAPSHOT</version>
+    <!-- Формат архива -->
+    <packaging>war</packaging>
+
+    <dependencies>
+        <!-- Servlet-API -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+
+        <!-- Postgres JDBC-driver -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.4.1207.jre7</version>
+        </dependency>
+    </dependencies>
+
+</project>

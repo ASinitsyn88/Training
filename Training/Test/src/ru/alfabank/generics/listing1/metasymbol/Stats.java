@@ -1,5 +1,6 @@
 package ru.alfabank.generics.listing1.metasymbol;
 
+/** This comment must be only in branch testing */
 public class Stats<T extends Number> {
 
     private T[] nums;

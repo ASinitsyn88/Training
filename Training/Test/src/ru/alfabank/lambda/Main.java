@@ -1,7 +1,20 @@
 package ru.alfabank.lambda;
 
-/**
- * Created by Alex on 03.06.2016.
- */
 public class Main {
+
+    public static void main(String[] args) {
+
+        Informational info = (str) -> {
+            String s = str;
+            System.out.println(s.toUpperCase());
+            return s;
+        };
+
+        print(info);
+    }
+
+    public static void print(Informational info) {
+
+        info.showInfo("Info");
+    }
 }

@@ -2,4 +2,5 @@
 backup/
 JavaBookSources/
 target/
+Training/Test/out/
 *.iml

@@ -14,7 +14,7 @@ public class MethodRefDemo {
 
         MyStringOps myStringOps = new MyStringOps();
         String inStr = "Lambdas add power to Java";
-        String outStr;
+        String outStr = "";
 
         outStr = stringOp(myStringOps :: strReverse, inStr);
 

@@ -1,0 +1,57 @@
+git init - создание локального репозитория в текущем каталоге
+git clone url - клонировать удалённый репозиторий в локальный репозиторий
+git config --global user.name "John Doe" - указать логин
+git config --global user.email johndoe@example.com - указать email
+git config --global gui.encoding utf-8 - выставить кодировку UTF-8 для gitk
+git config --global --add merge.tool kdiff3
+git config --global --add mergetool.kdiff3.path "C:/Program Files/KDiff3/kdiff3.exe"
+git config --global --add mergetool.kdiff3.trustExitCode false
+git config --global --add diff.guitool kdiff3
+git config --global --add difftool.kdiff3.path "C:/Program Files/KDiff3/kdiff3.exe"
+git config --global --add difftool.kdiff3.trustExitCode false
+
+git status - узнать состояние файлов в локальном репозитории
+git add . - добавить все файлы под контроль версий(проиндексировать)
+git add filename - добавить указанный файл под контроль версий(проиндексировать)
+git diff - увидеть,что изменил,но пока не проиндексировал
+git diff --staged - посмотреть,что проиндексировал и что войдёт в след. коммит
+git commit -m "comment" - коммит в локальный репозиторий
+git commit -a -m "comment" - коммит в локальный репозиторий с автоиндексацией
+git push -u origin master - коммит в удалённый репозиторий
+git rm filename - удаление файла с автоматической индексацией(удаляет в том числе и с HDD)
+git rm --cached filename - убрать файл из под контроля(файл не удаляется из HDD)
+
+git log - показать полную историю коммитов
+git log -p -2 - показать историю последних 2 коммитов с отображением их различий.
+git log -2 --graph - показать историю последних 2 коммитов с наглядным рисунком
+git log --since=1.hour - показать коммиты,сделанные за последний час
+gitk - история коммитов в графическом редакторе
+
+git checkout -- filename - отменить непроиндексированные изменения
+git checkout commit_hash -- filename - откатить указанный файл до состояния указанного коммита
+git reset --hard commit_hash - откатить всю ветку до указанного коммита без сохранения последних коммитов
+
+git remote -v - посмотреть список удалённых репозиториев
+git fetch origin - получить данные из удалённого репозитория без смёрживания
+git pull origin - получить данные из удалённого репозитория со смёрживанием
+
+git branch - получить список локальных веток(* помечена текущая ветка)
+git branch --no-merged - увидеть все ветки, содержащие наработки, которые пока ещё не слили в текущую ветку
+git branch branchname - создать ветку с указанным именем
+git branch -d branchname - удалить указанную ветку
+git checkout branchname - переключиться на указанную ветку
+git merge branchname - слить указанную ветку в текущую ветку
+git mergetool - запустить графический редактор для разрешения конфликтов слияния
+
+Коммит - сохранение состояния проиндексированных файлов.
+
+Индексация - добавление под контроль последней версии файла. После любого изменения
+в файле его нужно не забыть проиндексировать перед коммитом.
+
+Метки - нужны для пометок коммитов. Например один из коммитов можно пометить как v.1.1
+Затем можно откатиться на данную метку.
+
+origin/master - удалённый репозиторий(origin),ветка master
+master - основная ветка локального репозитория
+
+HEAD - это указатель на текущую ветку(При переключении с ветки на ветку он перемещается)

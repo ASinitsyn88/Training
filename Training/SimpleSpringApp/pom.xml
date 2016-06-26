@@ -18,17 +18,10 @@
     <dependencies>
 
         <!-- Элементы модуля CORE: -->
-        <!-- Spring core -->
+        <!-- Spring context -->
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>4.3.0.RELEASE</version>
-        </dependency>
-
-        <!-- Spring beans -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
+            <artifactId>spring-context</artifactId>
             <version>4.3.0.RELEASE</version>
         </dependency>
 

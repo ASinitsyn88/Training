@@ -1,8 +1,8 @@
-package api;
+package dao;
 
 import model.User;
 
-public interface UserService {
+public interface UserDAO {
 
     /**
      * Получить пользователя по id
@@ -19,12 +19,10 @@ public interface UserService {
     public long createUser(User user);
 
     /**
-     * Изменить авторизационные данные(логин и пароль)
-     * @param id - id пользователя
+     * Изменить пользователя
      * @param user - объект пользователя
      */
-    public User updateCredentials(long id, User user);
-
+    public void updateUser(User user);
 
     /**
      * Найти пользователя по логину и паролю
@@ -32,11 +30,5 @@ public interface UserService {
      * @param password - пароль
      * @return - объект пользователя
      */
-    public User findUserByCredentials(String login, String password);
-
-    /**
-     * Заблокировать пользователя по id
-     * @param id - id пользователя
-     */
-    public void blockUser(long id);
+    public User findUserByLoginAndPassword(String login, String password);
 }

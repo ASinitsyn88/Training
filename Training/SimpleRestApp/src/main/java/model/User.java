@@ -21,7 +21,7 @@ public class User {
     // пароль
     private String password;
     // признак: активен/заблокирован
-    private boolean isActive;
+    private int isActive;
 
     /**
      * Получить id
@@ -135,7 +135,7 @@ public class User {
      * Получить признак: активен/заблокирован
      * @return
      */
-    public boolean isActive() {
+    public int isActive() {
 
         return isActive;
     }
@@ -144,7 +144,7 @@ public class User {
      * Установить признак: активен/заблокирован
      * @param isActive
      */
-    public void setActive(boolean isActive) {
+    public void setActive(int isActive) {
 
         this.isActive = isActive;
     }

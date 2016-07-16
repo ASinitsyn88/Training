@@ -1,1 +1,0 @@
-This text from readme.txt file

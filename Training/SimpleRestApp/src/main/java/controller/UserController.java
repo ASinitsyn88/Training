@@ -30,16 +30,17 @@ public class UserController {
         return userService.updateCredentials(id, user);
     }
 
-    @RequestMapping(value="/block/{id}", method = RequestMethod.PUT)
-    public long blockUser(@PathVariable("id") long id) {
-
-        return userService.blockUser(id);
-    }
 
     @RequestMapping(value="/find", method = RequestMethod.PUT)
     public User findUserByCredentials(@RequestParam(value = "login", required = true) String login,
                                       @RequestParam(value = "password", required = true) String password) {
 
         return userService.findUserByCredentials(login, password);
+    }
+
+    @RequestMapping(value="/{id}/block", method = RequestMethod.GET)
+    public void blockUser(@PathVariable("id") long id) {
+
+        userService.blockUser(id);
     }
 }

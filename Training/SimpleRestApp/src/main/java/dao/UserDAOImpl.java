@@ -1,6 +1,8 @@
 package dao;
 
 import model.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import java.sql.*;
 
@@ -9,6 +11,8 @@ import java.sql.*;
  */
 @Repository
 public class UserDAOImpl implements UserDAO {
+
+    private static final Logger logger = LogManager.getLogger(UserDAOImpl.class.getName());
 
     private static final String GET_USER_BY_ID = "SELECT * FROM users WHERE id = ?";
     private static final String CREATE_USER = "INSERT INTO users(name, lastname, middlename, login, password, isActive) VALUES(?, ?, ?, ?, ?, ?)";
@@ -24,8 +28,7 @@ public class UserDAOImpl implements UserDAO {
             Class.forName("org.h2.Driver");
             con = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
         } catch (ClassNotFoundException e) {
-            System.out.println("Can not find jdbc-driver class: org.h2.Driver");
-            e.printStackTrace();
+            logger.error("Can not find jdbc-driver class: org.h2.Driver", e);
         } catch (SQLException e) {
             System.out.println("Fault to connect to DB");
             e.printStackTrace();
@@ -36,10 +39,10 @@ public class UserDAOImpl implements UserDAO {
     public User getUserById(long id) {
 
         User user = null;
-        System.out.println("## connect to the database ...");
+        logger.debug("## connect to the database ...");
         try (PreparedStatement stmt = con.prepareStatement(GET_USER_BY_ID)) {
             if (!stmt.isClosed()) {
-                System.out.println("## database connection successfully");
+                logger.debug("## database connection successfully");
             }
             stmt.setLong(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
@@ -53,12 +56,11 @@ public class UserDAOImpl implements UserDAO {
                     user.setPassword(rs.getString("password"));
                     user.setActive(rs.getInt("isActive"));
                 }
-                System.out.println("## data obtain successfully");
+                logger.debug("## data obtain successfully");
             }
-            System.out.println("## connection to the database is closed");
+            logger.debug("## connection to the database is closed");
         } catch (SQLException e) {
-            System.out.println("Fault connection to database");
-            e.printStackTrace();
+            logger.error("Fault connection to database", e);
         }
         return user;
     }
@@ -70,7 +72,7 @@ public class UserDAOImpl implements UserDAO {
         System.out.println("## connect to the database ...");
         try (PreparedStatement stmt = con.prepareStatement(CREATE_USER, Statement.RETURN_GENERATED_KEYS)) {
             if (!stmt.isClosed()) {
-                System.out.println("## database connection successfully");
+                logger.debug("## database connection successfully");
             }
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getLastname());
@@ -85,8 +87,7 @@ public class UserDAOImpl implements UserDAO {
                 }
             }
         } catch (SQLException e) {
-            System.out.println("Fault connection to database");
-            e.printStackTrace();
+            logger.error("Fault connection to database", e);
         }
         return id;
     }
@@ -94,10 +95,10 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public void updateUser(User user) {
 
-        System.out.println("## connect to the database ...");
+        logger.debug("## connect to the database ...");
         try (PreparedStatement stmt = con.prepareStatement(UPDATE_USER)) {
             if (!stmt.isClosed()) {
-                System.out.println("## database connection successfully");
+                logger.debug("## database connection successfully");
             }
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getLastname());
@@ -107,10 +108,9 @@ public class UserDAOImpl implements UserDAO {
             stmt.setInt(6, user.isActive());
             stmt.setLong(7, user.getId());
             int rowAffected = stmt.executeUpdate();
-            System.out.println("## Update successfully. Row affected: " + rowAffected);
+            logger.debug("## Update successfully. Row affected: " + rowAffected);
         } catch (SQLException e) {
-            System.out.println("Fault connection to database");
-            e.printStackTrace();
+            logger.error("Fault connection to database", e);
         }
     }
 
@@ -118,10 +118,10 @@ public class UserDAOImpl implements UserDAO {
     public User findUserByLoginAndPassword(String login, String password) {
 
         User user = null;
-        System.out.println("## connect to the database ...");
+        logger.debug("## connect to the database ...");
         try (PreparedStatement stmt = con.prepareStatement(FIND_USER_BY_LOGIN_AND_PASSWORD)) {
             if (!stmt.isClosed()) {
-                System.out.println("## database connection successfully");
+                logger.debug("## database connection successfully");
             }
             stmt.setString(1, login);
             stmt.setString(2, password);
@@ -136,11 +136,11 @@ public class UserDAOImpl implements UserDAO {
                     user.setPassword(rs.getString("password"));
                     user.setActive(rs.getInt("isActive"));
                 }
-                System.out.println("## data obtain successfully");
+                logger.debug("## data obtain successfully");
             }
-            System.out.println("## connection to the database is closed");
+            logger.debug("## connection to the database is closed");
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Fault connection to database", e);
         }
         return user;
     }

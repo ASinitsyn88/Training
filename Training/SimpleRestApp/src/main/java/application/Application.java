@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableAutoConfiguration
-@ComponentScan({"controller","service", "dao"})
+@ComponentScan({"controller","service", "dao", "common"})
 public class Application {
 
     /**

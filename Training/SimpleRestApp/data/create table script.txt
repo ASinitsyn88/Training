@@ -1,0 +1,14 @@
+CREATE TABLE users
+(
+    id int PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    name varchar(20) NOT NULL,
+    lastname varchar(20) NOT NULL,
+    middlename varchar(20),
+    login varchar(20) NOT NULL,
+    password varchar(10) NOT NULL,
+    isActive tinyint  NOT NULL
+);
+ALTER TABLE users ADD CONSTRAINT unique_login UNIQUE (login);
+
+
+INSERT INTO users (name, lastname, middlename, login, password, isactive) VALUES ('Alexandr', 'Sinitsyn', 'Sergeevich', 'A_500', 'PWD', 1)

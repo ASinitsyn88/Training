@@ -1,6 +1,6 @@
 @SpringBootApplication - аннотация объединяет в себе 3 другие аннотации(@Configuration, @EnableAutoConfiguration, @ComponentScan)
 @Configuration - указываем фреймворку Spring, что данный класс является конфигурационным,т.е. аналогом applicationContext.xml
-@EnableAutoConfiguration - автоматическая конфигурация бинов
+@EnableAutoConfiguration - spring анализирует зависимости и на их основе конфигурирует проект.
 @ComponentScan - указываем фреймворку Spring, в каких пакетах необходимо искать контроллеры и сервисы для их инициализации
 
 @RestController - указываем,что класс может обрабатывать HTTP-REST запросы. Включает в себя аннотацию @ResponseBody

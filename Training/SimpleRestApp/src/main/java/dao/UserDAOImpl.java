@@ -27,6 +27,7 @@ public class UserDAOImpl implements UserDAO {
         try {
             Class.forName("org.h2.Driver");
             con = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
+            logger.debug("## DB driver load successfully");
         } catch (ClassNotFoundException e) {
             logger.error("Can not find jdbc-driver class: org.h2.Driver", e);
         } catch (SQLException e) {

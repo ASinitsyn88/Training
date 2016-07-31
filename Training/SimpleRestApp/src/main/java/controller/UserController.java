@@ -16,6 +16,11 @@ public class UserController {
     @Autowired
     private UserServiceImpl userService;
 
+    @RequestMapping("/hello")
+    public String hello() {
+        return "Hello World!";
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public User getUser(@PathVariable("id") long id) {
 

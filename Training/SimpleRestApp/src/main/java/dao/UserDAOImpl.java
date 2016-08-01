@@ -4,6 +4,10 @@ import model.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Repository;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 import java.sql.*;
 
 /**
@@ -25,13 +29,14 @@ public class UserDAOImpl implements UserDAO {
     public UserDAOImpl() {
 
         try {
-            Class.forName("org.h2.Driver");
-            con = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
-            logger.debug("## DB driver load successfully");
-        } catch (ClassNotFoundException e) {
-            logger.error("Can not find jdbc-driver class: org.h2.Driver", e);
+            Context ctx = new InitialContext();
+            DataSource ds = (DataSource)ctx.lookup("java:comp/env/jdbc/TestDB");
+            con = ds.getConnection();
         } catch (SQLException e) {
             System.out.println("Fault to connect to DB");
+            e.printStackTrace();
+        } catch (NamingException e) {
+            System.out.println("Can not find tomcat datasource");
             e.printStackTrace();
         }
     }

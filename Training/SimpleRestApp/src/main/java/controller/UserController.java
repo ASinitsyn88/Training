@@ -1,10 +1,12 @@
 package controller;
 
+import model.Quote;
 import model.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import rest.FakeRestService;
 import service.UserServiceImpl;
 
 @RestController
@@ -15,10 +17,14 @@ public class UserController {
 
     @Autowired
     private UserServiceImpl userService;
+    @Autowired
+    private FakeRestService fakeRestService;
 
-    @RequestMapping("/hello")
-    public String hello() {
-        return "Hello World!";
+    @RequestMapping(value = "/quote", method = RequestMethod.GET)
+    public Quote getQuote() {
+
+        logger.debug("## --- getQuote method started ---");
+        return fakeRestService.getQuote();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)

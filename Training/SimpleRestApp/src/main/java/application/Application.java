@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableAutoConfiguration
-@ComponentScan({"controller","service", "dao", "common", "rest", "soap"})
+@ComponentScan({"controller","service", "dao", "common", "rest", "soap", "bean"})
 public class Application extends SpringBootServletInitializer {
 
     /**

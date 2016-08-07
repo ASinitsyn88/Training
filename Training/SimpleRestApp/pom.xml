@@ -43,6 +43,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!-- работа с веб-сервисом посредством SOAP -->
+        <dependency>
+            <groupId>org.springframework.ws</groupId>
+            <artifactId>spring-ws-core</artifactId>
+        </dependency>
         <!-- web-компонент(По-умолчанию Tomcat) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -73,7 +78,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-            <!-- Подключаем плагин для генерации классов по wsdl -->
+             <!--Подключаем плагин для генерации классов по wsdl-->
             <!--<plugin>-->
                 <!--<groupId>org.jvnet.jaxb2.maven2</groupId>-->
                 <!--<artifactId>maven-jaxb2-plugin</artifactId>-->

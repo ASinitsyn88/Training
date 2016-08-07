@@ -1,13 +1,16 @@
 package controller;
 
+import model.CityForecast;
 import model.Quote;
 import model.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
-import rest.FakeRestService;
+import rest.RestServiceClient;
 import service.UserServiceImpl;
+import soap.SOAPServiceClient;
 
 @RestController
 @RequestMapping("/myapp/users")
@@ -18,13 +21,22 @@ public class UserController {
     @Autowired
     private UserServiceImpl userService;
     @Autowired
-    private FakeRestService fakeRestService;
+    private RestServiceClient restServiceClient;
+    @Autowired
+    private SOAPServiceClient soapServiceClient;
 
     @RequestMapping(value = "/quote", method = RequestMethod.GET)
     public Quote getQuote() {
 
         logger.debug("## --- getQuote method started ---");
-        return fakeRestService.getQuote();
+        return restServiceClient.getQuote();
+    }
+
+    @RequestMapping(value = "/forecast/{zip}", method = RequestMethod.GET)
+    public CityForecast getForecastByZipCode(@PathVariable("zip") String zip) {
+
+        logger.debug("## --- getForecastByZipCode method started ---");
+        return soapServiceClient.getCityForecastByZip(zip);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)

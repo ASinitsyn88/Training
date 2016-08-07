@@ -10,10 +10,12 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class FakeRestService {
 
+    private static final String URL = "http://gturnquist-quoters.cfapps.io/api/random";
+
     public Quote getQuote() {
 
         RestTemplate restTemplate = new RestTemplate();
-        Quote quote = restTemplate.getForObject("http://gturnquist-quoters.cfapps.io/api/random", Quote.class);
+        Quote quote = restTemplate.getForObject(URL, Quote.class);
 
         return quote;
     }

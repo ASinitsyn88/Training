@@ -66,13 +66,36 @@
         </dependency>
     </dependencies>
 
-    <!-- Подключаем плагин для создания jar или war файлов -->
     <build>
         <plugins>
+            <!-- Подключаем плагин для создания jar или war файлов -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <!-- Подключаем плагин для генерации классов по wsdl -->
+            <!--<plugin>-->
+                <!--<groupId>org.jvnet.jaxb2.maven2</groupId>-->
+                <!--<artifactId>maven-jaxb2-plugin</artifactId>-->
+                <!--<version>0.13.1</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<goals>-->
+                            <!--<goal>generate</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+                <!--<configuration>-->
+                    <!--<schemaLanguage>WSDL</schemaLanguage>-->
+                    <!--<generateDirectory>src/main/java</generateDirectory>-->
+                    <!--<generatePackage>generated.weather</generatePackage>-->
+                    <!--<schemas>-->
+                        <!--<schema>-->
+                            <!--<url>http://wsf.cdyne.com/WeatherWS/Weather.asmx?wsdl</url>-->
+                        <!--</schema>-->
+                    <!--</schemas>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
         </plugins>
     </build>
 

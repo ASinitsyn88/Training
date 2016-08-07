@@ -1,12 +1,9 @@
 package model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 /**
  * Структура данных "Котировка".
  * Описывает объект,возвращаемый веб-сервисом.
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Quote {
 
     // Статус получения котировки

@@ -15,8 +15,7 @@ public class DispatcherForwardServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        System.out.println("## DispatcherForwardServlet started");
-        System.out.println("## DispatcherForwardServlet forwardTo " + forwardTo);
+        System.out.println("## DispatcherForwardServlet. Forward to " + forwardTo);
         // Указываем url-pattern сервлета на который сделать forward
         RequestDispatcher rd = req.getRequestDispatcher(forwardTo);
         rd.forward(req, resp);

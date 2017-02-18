@@ -9,6 +9,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 /**
  * Created by Alex on 15.02.2017.
+ * Точка входа в приложение
  */
 @SpringBootApplication
 @EnableJpaRepositories
@@ -18,11 +19,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableAutoConfiguration
 public class InpasServiceApplication extends SpringBootServletInitializer {
 
-    /**
-     * Точка входа в приложение
-     * @param args String[] - аргументы командной строки
-     * @throws Exception
-     */
     public static void main(String[] args) throws Exception {
 
         SpringApplication.run(InpasServiceApplication.class, args);

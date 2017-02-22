@@ -23,6 +23,13 @@ public interface UserService {
     List<User> findAll();
 
     /**
+     * Найти пользователя по логину.
+     * @param login String - логин пользователя
+     * @return User
+     */
+    User findByLogin(String login);
+
+    /**
      * Создать пользователя
      * @param user User - объект нового пользователя
      * @return User

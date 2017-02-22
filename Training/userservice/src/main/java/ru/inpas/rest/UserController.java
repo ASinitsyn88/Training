@@ -34,6 +34,12 @@ public class UserController {
         return userService.findAll();
     }
 
+    @RequestMapping(value = "/users/byLogin/{login}", method = RequestMethod.GET)
+    public User findAll(@PathVariable("login") String login) {
+
+        return userService.findByLogin(login);
+    }
+
     @RequestMapping(value = "/users", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public User create(@RequestBody User user) {
 

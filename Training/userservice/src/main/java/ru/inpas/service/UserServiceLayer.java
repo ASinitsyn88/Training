@@ -49,6 +49,22 @@ public class UserServiceLayer implements UserService {
         }
     }
 
+    @Transactional(readOnly = true)
+    @Override
+    public User findByLogin(String login) {
+
+        if (login == null) {
+            System.out.println("Login can not be null");
+            return null;
+        }
+        try {
+            return userRepository.findByLogin(login);
+        } catch (Exception e) {
+            System.out.println("Exception during get data from DB");
+            return null;
+        }
+    }
+
     @Transactional
     @Override
     public User create(User user) {

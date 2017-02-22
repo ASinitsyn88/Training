@@ -22,4 +22,11 @@ public interface UserRepository extends CrudRepository<UserDao, Long> {
      * @return Collection<UserDao>
      */
     Collection<UserDao> findAll();
+
+    /**
+     * Найти пользователя по логину.
+     * @param login String - логин пользователя
+     * @return UserDao
+     */
+    UserDao findByLogin(String login);
 }

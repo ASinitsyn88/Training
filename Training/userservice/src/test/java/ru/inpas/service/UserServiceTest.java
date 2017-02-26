@@ -143,11 +143,11 @@ public class UserServiceTest {
         userTest.setFirstname("NameForUpdate");
         User response = userService.update(userTest);
 
-        assertNotNull(response);
-        assertEquals(response.getFirstname(), "NameForUpdate");
-
         userTest.setFirstname(originFirstname);
         userService.update(userTest);
+
+        assertNotNull(response);
+        assertEquals(response.getFirstname(), "NameForUpdate");
     }
 
     @Test
@@ -164,10 +164,10 @@ public class UserServiceTest {
         userTest.setId(null);
 
         User response = userService.update(userTest);
-        assertNull(response);
-
         userTest.setId(originalId);
         userService.update(userTest);
+
+        assertNull(response);
     }
 
     @Test
@@ -177,10 +177,9 @@ public class UserServiceTest {
         userTest.setId(-1L);
 
         User response = userService.update(userTest);
-        assertNull(response);
-
         userTest.setId(originalId);
         userService.update(userTest);
+        assertNull(response);
     }
 
     @Test

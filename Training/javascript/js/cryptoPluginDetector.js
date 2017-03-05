@@ -1,10 +1,6 @@
 // Если браузер поддерживает Promise (асинхронную обработку)
 var canPromise = !!window.Promise;
 if (canPromise) {
-  var oAbout;
-  cadesplugin.async_spawn(function *() {
-    oAbout = yield cadesplugin.CreateObjectAsync("CAdESCOM.About");
-  });
   // Обработчик результата cadesplugin - resolve
   cadesplugin.then(function() {
     Common_CheckForPlugIn(); // эта функция не вызывается

@@ -1,7 +1,0 @@
-https://www.cryptopro.ru/forum2/default.aspx?g=posts&m=77895#post77895 - форум с обсуждением проблемы
-https://www.cryptopro.ru/sites/default/files/products/cades/demopage/simple.html - демо страница
-http://cpdn.cryptopro.ru/default.asp?url=content/cades/plugin-samples-version.html - документация crypto-api
-
-1.simple.html - Common_CheckForPlugIn() стр.78
-2.Code.js - function Common_CheckForPlugIn() стр.121
-3.async_code.js - function CheckForPlugIn_Async() стр.47

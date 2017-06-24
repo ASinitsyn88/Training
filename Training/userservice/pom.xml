@@ -12,14 +12,14 @@
     <artifactId>userservice</artifactId>
     <!-- Собирать проект в war-файл -->
     <packaging>war</packaging>
-    <!-- Версия проекта(SNAPSHOT - не окончательная версия) -->
-    <version>1.0-SNAPSHOT</version>
+    <!-- Версия проекта -->
+    <version>1.0.0</version>
 
     <!-- Наследование от родительского pom.xml: SpringBoot -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.1.RELEASE</version>
+        <version>1.5.2.RELEASE</version>
     </parent>
 
     <properties>
@@ -27,6 +27,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
     <dependencies>
@@ -34,17 +36,36 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <version>1.5.2.RELEASE</version>
         </dependency>
         <!-- JPA -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <version>1.5.2.RELEASE</version>
         </dependency>
+        <!-- exclude tomcat jdbc connection pool, use HikariCP -->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-jdbc</artifactId>-->
+            <!--<exclusions>-->
+                <!--<exclusion>-->
+                    <!--<groupId>org.apache.tomcat</groupId>-->
+                    <!--<artifactId>tomcat-jdbc</artifactId>-->
+                <!--</exclusion>-->
+            <!--</exclusions>-->
+        <!--</dependency>-->
+        <!-- Pool соединений -->
+        <!--<dependency>-->
+            <!--<groupId>com.zaxxer</groupId>-->
+            <!--<artifactId>HikariCP</artifactId>-->
+            <!--<version>2.6.1</version>-->
+        <!--</dependency>-->
         <!-- For Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <version>1.5.1.RELEASE</version>
+            <version>1.5.2.RELEASE</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -57,6 +78,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
+            <version>42.0.0</version>
             <scope>runtime</scope>
         </dependency>
         <!-- Lombok -->
@@ -73,5 +95,9 @@
             <version>2.8.0</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <finalName>userservice</finalName>
+    </build>
 
 </project>

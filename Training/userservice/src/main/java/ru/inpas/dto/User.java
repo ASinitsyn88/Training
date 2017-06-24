@@ -1,7 +1,12 @@
 package ru.inpas.dto;
 
 import com.google.gson.Gson;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * Created by Alex on 15.02.2017.

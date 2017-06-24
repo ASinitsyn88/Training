@@ -1,7 +1,13 @@
 package ru.inpas.dao;
 
 import ru.inpas.dto.User;
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 /**
  * Created by Alex on 15.02.2017.

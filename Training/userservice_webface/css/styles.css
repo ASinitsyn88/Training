@@ -7,6 +7,14 @@ label {
     font-weight: bold;
 }
 
+.table-border {
+    border-width: 10px;
+    border-color: lightskyblue;
+    border-style: outset;
+    padding-left: 10px;
+    padding-right: 10px; 
+}
+
 tr.table-row-spacing>td {
     padding-bottom: 1em;
 }

@@ -6,10 +6,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Пользователи</title>
     <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <script src="../js/validation.js"></script>
 </head>
 
 <body>
-    <form name="users">
+    <form id="users" name="users" onsubmit="formValidation()">
         <table class="table-border" align="center" width="60%" cellpadding="0" cellspacing="10">
             <tr>
                 <td><label for="lastname">Фамилия<span>*</span></label></td>
@@ -20,11 +21,11 @@
             </tr>
 
             <tr class="table-row-spacing">
-                <td><input type="text" id="lastname" name="lastname" value="" size="20em" maxlength="20" required="true"></td>
-                <td><input type="text" id="firstname" name="firstname" value="" size="20em" maxlength="20" required="true"></td>
-                <td><input type="text" id="patronymic" name="patronymic" value="" size="20em" maxlength="20" required="false"></td>
-                <td><input type="text" id="phone" name="phone" value="" size="20em" maxlength="11" required="true"></td>
-                <td><input type="text" id="login" name="login" value="" size="20em" maxlength="20" required="true"></td>
+                <td><input type="text" id="lastname" name="lastname" value="" size="20em" maxlength="20"></td>
+                <td><input type="text" id="firstname" name="firstname" value="" size="20em" maxlength="20"></td>
+                <td><input type="text" id="patronymic" name="patronymic" value="" size="20em" maxlength="20"></td>
+                <td><input type="text" id="phone" name="phone" value="" size="20em" maxlength="11"></td>
+                <td><input type="text" id="login" name="login" value="" size="20em" maxlength="20"></td>
             </tr>
 
             <tr>

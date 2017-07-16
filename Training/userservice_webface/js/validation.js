@@ -1,6 +1,6 @@
 function formValidation() {
     var usersForm = new UsersForm();
-    emptyFieldValidation(usersForm);
+    return emptyFieldValidation(usersForm);
 }
 
 function UsersForm() {
@@ -12,20 +12,30 @@ function UsersForm() {
 }
 
 function emptyFieldValidation(usersForm) {
+    var isValid = true;
     if (isEmpty(usersForm.lastnameInput.value)) {
-        alert("lastname is empty");
+        showError(usersForm.lastnameInput);
+        isValid = false;
     }
     if (isEmpty(usersForm.firstnameInput.value)) {
-        alert("name is empty");
+        showError(usersForm.firstnameInput);
+        isValid = false;
     }
     if (isEmpty(usersForm.phoneInput.value)) {
-        alert("phone is empty");
+        showError(usersForm.phoneInput);
+        isValid = false;
     }
     if (isEmpty(usersForm.loginInput.value)) {
-        alert("login is empty");
+        showError(usersForm.loginInput);
+        isValid = false;
     }
+    return isValid;
 }
 
 function isEmpty(value) {
     return value.length === 0 || !value.trim() || typeof value == "undefined";
+}
+
+function showError(input) {
+    document.getElementById(input.id + "Error").innerHTML = "Поле должно быть заполнено";
 }

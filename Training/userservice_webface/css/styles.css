@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'UnifrakturCook';
-    src:url("../fonts/UnifrakturCook-Bold.ttf");
+    src: url("../fonts/UnifrakturCook-Bold.ttf");
 }
 
 body, input {
@@ -10,6 +10,10 @@ body, input {
 
 label {
     font-weight: bold;
+}
+
+.error {
+    border-color: red;
 }
 
 .table-border {

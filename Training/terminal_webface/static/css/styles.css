@@ -482,8 +482,6 @@ h2.b-section__form__titile {
 }
 
 .b-input:focus~.b-form__placeholder, .b-input.b-input_not-empty~.b-form__placeholder,
-/*.b-input.valid~.b-form__placeholder,*/
-
 label.error, .b-select:focus~.b-form__placeholder, .b-select.b-input_not-empty~.b-form__placeholder, .b-select.valid~.b-form__placeholder {
     font-size: 11px;
     top: 4px;

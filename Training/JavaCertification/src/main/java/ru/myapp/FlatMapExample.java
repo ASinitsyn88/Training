@@ -6,7 +6,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * flatMap - преобразует 1 элемент в несколько элементов другого типа
+ * flatMap - преобразует 1 элемент в несколько элементов другого типа.
+ * flatMap преобразует каждый элемент списка в отдельный Stream, а затем
+ * комбинирует все полученные Stream в один.
  */
 public class FlatMapExample {
 

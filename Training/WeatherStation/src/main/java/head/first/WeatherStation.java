@@ -3,6 +3,9 @@ package head.first;
 import head.first.object.CurrentConditionsDisplay;
 import head.first.subject.WeatherData;
 
+/**
+ * Паттерн "Наблюдатель"
+ */
 public class WeatherStation {
     public static void main(String[] args) {
         WeatherData weatherData = new WeatherData();

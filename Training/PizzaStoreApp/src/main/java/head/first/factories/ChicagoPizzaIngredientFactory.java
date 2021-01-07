@@ -15,6 +15,9 @@ import head.first.ingredients.veggies.EggPlant;
 import head.first.ingredients.veggies.Spinach;
 import head.first.ingredients.veggies.Veggies;
 
+/**
+ * Конкретная фабрика ингредиентов Чикаго
+ */
 public class ChicagoPizzaIngredientFactory implements PizzaIngredientFactory {
 
     @Override

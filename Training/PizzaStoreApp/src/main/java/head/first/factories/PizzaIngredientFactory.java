@@ -8,7 +8,7 @@ import head.first.ingredients.sauce.Sauce;
 import head.first.ingredients.veggies.Veggies;
 
 /**
- * Фабрика ингредиентов
+ * Абстрактная фабрика ингредиентов
  */
 public interface PizzaIngredientFactory {
     Dough createDough();

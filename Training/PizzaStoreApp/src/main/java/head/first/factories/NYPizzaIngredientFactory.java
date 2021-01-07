@@ -12,6 +12,9 @@ import head.first.ingredients.sauce.MarinaraSauce;
 import head.first.ingredients.sauce.Sauce;
 import head.first.ingredients.veggies.*;
 
+/**
+ * Конкретная фабрика ингредиентов Нью-Йорка
+ */
 public class NYPizzaIngredientFactory implements PizzaIngredientFactory {
 
     @Override

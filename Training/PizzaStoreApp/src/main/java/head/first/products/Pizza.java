@@ -1,23 +1,23 @@
 package head.first.products;
 
-import java.util.ArrayList;
-import java.util.List;
+import head.first.ingredients.cheese.Cheese;
+import head.first.ingredients.clams.Clams;
+import head.first.ingredients.dough.Dough;
+import head.first.ingredients.pepperoni.Pepperoni;
+import head.first.ingredients.sauce.Sauce;
+import head.first.ingredients.veggies.Veggies;
+import java.util.Arrays;
 
 public abstract class Pizza {
     protected String name;
-    protected String dough;
-    protected String sauce;
-    protected List<String> toppings = new ArrayList<>();
+    protected Dough dough;
+    protected Sauce sauce;
+    protected Veggies[] veggies;
+    protected Cheese cheese;
+    protected Pepperoni pepperoni;
+    protected Clams clam;
 
-    public void prepare() {
-        System.out.println("Preparing " + name);
-        System.out.println("Tossing dough " + dough);
-        System.out.println("Adding sauce " + sauce);
-        System.out.println("Adding toppings: ");
-        for (String topping : toppings) {
-            System.out.println(" " + topping);
-        }
-    }
+    public abstract void prepare();
 
     public void bake() {
         System.out.println("Bake for 25 minutes at 350");
@@ -39,27 +39,64 @@ public abstract class Pizza {
         this.name = name;
     }
 
-    public String getDough() {
+    public Dough getDough() {
         return dough;
     }
 
-    public void setDough(String dough) {
+    public void setDough(Dough dough) {
         this.dough = dough;
     }
 
-    public String getSauce() {
+    public Sauce getSauce() {
         return sauce;
     }
 
-    public void setSauce(String sauce) {
+    public void setSauce(Sauce sauce) {
         this.sauce = sauce;
     }
 
-    public List<String> getToppings() {
-        return toppings;
+    public Veggies[] getVeggies() {
+        return veggies;
     }
 
-    public void setToppings(List<String> toppings) {
-        this.toppings = toppings;
+    public void setVeggies(Veggies[] veggies) {
+        this.veggies = veggies;
+    }
+
+    public Cheese getCheese() {
+        return cheese;
+    }
+
+    public void setCheese(Cheese cheese) {
+        this.cheese = cheese;
+    }
+
+    public Pepperoni getPepperoni() {
+        return pepperoni;
+    }
+
+    public void setPepperoni(Pepperoni pepperoni) {
+        this.pepperoni = pepperoni;
+    }
+
+    public Clams getClam() {
+        return clam;
+    }
+
+    public void setClam(Clams clam) {
+        this.clam = clam;
+    }
+
+    @Override
+    public String toString() {
+        return "Pizza{" +
+                "name='" + name + '\'' +
+                ", dough=" + dough +
+                ", sauce=" + sauce +
+                ", veggies=" + Arrays.toString(veggies) +
+                ", cheese=" + cheese +
+                ", pepperoni=" + pepperoni +
+                ", clam=" + clam +
+                '}';
     }
 }

@@ -1,25 +1,31 @@
 package head.first.stores;
 
-import head.first.products.Pizza;
-import head.first.products.chicago.ChicagoStyleCheesePizza;
-import head.first.products.chicago.ChicagoStyleClamPizza;
-import head.first.products.chicago.ChicagoStylePepperoniPizza;
-import head.first.products.chicago.ChicagoStyleVeggiePizza;
+import head.first.factories.ChicagoPizzaIngredientFactory;
+import head.first.factories.PizzaIngredientFactory;
+import head.first.products.*;
 
+/**
+ * Пиццерия Чикаго
+ */
 public class ChicagoPizzaStore extends PizzaStore {
 
     @Override
     Pizza createPizza(String type) {
+        Pizza pizza = null;
+        PizzaIngredientFactory ingredientFactory = new ChicagoPizzaIngredientFactory();
         if ("cheese".equals(type)) {
-            return new ChicagoStyleCheesePizza();
+            pizza = new CheesePizza(ingredientFactory);
+            pizza.setName("Chicago Style Cheese Pizza");
         } else if ("veggie".equals(type)) {
-            return new ChicagoStyleVeggiePizza();
+            pizza = new VeggiePizza(ingredientFactory);
+            pizza.setName("Chicago Style Veggie Pizza");
         } else if ("clam".equals(type)) {
-            return new ChicagoStyleClamPizza();
+            pizza = new ClamPizza(ingredientFactory);
+            pizza.setName("Chicago Style Clam Pizza");
         } else if ("pepperoni".equals(type)) {
-            return new ChicagoStylePepperoniPizza();
-        } else {
-            return null;
+            pizza = new PepperoniPizza(ingredientFactory);
+            pizza.setName("Chicago Style Pepperoni Pizza");
         }
+        return pizza;
     }
 }

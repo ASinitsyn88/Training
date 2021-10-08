@@ -1,0 +1,53 @@
+Docker   - это средство упаковки, доставки и запуска приложения
+Упаковка - все необходимые зависимости упаковываются в контейнер
+Доставка - docker предлагает механизм передачи контейнера
+Запуск   - осуществляется единым образом
+
+Docker image - готовое к запуску приложение (но ещё не запущенное). Имеет read-only доступ. На основе 1 образа можно создать множество контейнеров
+Docker container - работающее приложение, созданное на базе docker image. Контейнер не может изменить image. Контейнер работает пока работает приложение
+
+Docker registry (реестр image) - расположен на локальном компьютере и в нём содержаться образы (image) которые создали мы сами.
+Docker hub (реестр image) - общедоступный реестр (по аналогии с git hub)
+
+Dockerfile - содержит инструкцию по сборке image. Каждая инструкция в таком файле создаёт отдельный слой
+
+УСТАНОВКА DOCKER (Kubuntu):
+1. sudo apt-get update && sudo apt-get install docker.io docker-compose - установка дистрибутива
+2. sudo groupadd docker - добавить группу docker
+3. sudo usermod -aG docker $USER - добавление пользователя в docker group чтобы не писать sudo перед каждой командой
+4. newgrp docker - обновить групповые политики
+5. docker images - проверка работоспособности, не должно быть ошибок
+
+СБОРКА И ЗАПУСК КОНТЕЙНЕРА:
+docker build -t hello-world . - перейти в текущую директорию и собрать контейнер с именем hello-world. Знак (.) означает текущий каталог
+docker run hello-world - запустить контейнер с именем hello-world. Можно добавить параметр -d - запуск в фоновом режиме
+docker run --rm --name web -p 8080:8080 hello-world - альтернативный способ запуска
+    --rm - удалить контейнер после того как он завершит работу
+    --name - присвоить контейнеру имя
+    -p 8080:8080 - порт контейнера (8080) пробрасывается и связывается с портом (8080) на локальной машине
+    hello-world - название image на основе которого запускается контейнер
+
+ПОДКЛЮЧЕНИЕ ВНЕШНИХ ИСТОЧНИКОВ ДАННЫХ:
+1. Монтирование локальной папки к контейнеру
+docker run --rm -d --name web -p 8080:8080 -v local_folder_absolute_path:container_folder_absolute_path hello-world
+2. Docker volume
+docker volume create volume_name - создать docker volume с указанным name
+docker run --rm -d --name web -p 8080:8080 -v web:container_folder_absolute_path hello-world
+
+ПОЛЕЗНЫЕ КОМАНДЫ
+docker images - список images
+docker run -d container_name - запуск указанного контейнера
+docker ps - просмотр запущенных контейнеров
+docker ps -a - просмотр ранее запущенных контейнеров
+docker rmi -f $(docker images -a -q) - удаление всех image
+docker rmi image_id - удалить контейнер с указанным id
+docker rm container_hash - удалить контейнер с указанным hash
+docker rm $(docker ps -aq) - удалить все контейнеры
+docker stop container_id - остановить контейнер с указанным id
+docker stop $(docker ps -a -q) - остановить все контейнеры | docker-compose done - остановить все контейнеры
+docker volume ls - посмотреть все docker volume
+docker volume create volume_name - создать docker volume с указанным name
+docker volume prune - удалить все volume
+docker network prune - сброс сетевых настроек
+docker-compose up -d - сборка и запуск
+docker logs --since=1h container_id - выводит логи указанного контейнера

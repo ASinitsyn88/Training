@@ -1,0 +1,45 @@
+version: "3"
+
+services:
+  postgres:
+    container_name: postgresql
+    build: MyPostgres/
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    networks:
+      - postgres
+      
+  pgadmin:
+    container_name: pgadmin4
+    image: dpage/pgadmin4:latest
+    depends_on:
+      - postgres
+    ports:
+      - 5050:80
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: test1234
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    networks:
+      - postgres
+    tty: true
+
+  # Postman GET: localhost:8888/all - return user data in json format
+  # Postman GET: localhost:8888/test - test connection
+  rest:
+    container_name: rest
+    build: MyPostgresREST/
+    restart: always
+    ports:
+      - 8888:8888
+      - 8080:8080
+    networks:
+      - postgres
+
+networks:
+  postgres:
+    driver: bridge

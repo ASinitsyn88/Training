@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- Для конфигурирования может использоваться hibernate.cfg.xml или persistence.xml (ограничен спецификацией JPA) -->
+
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <!-- useSSL - SSL вкл/выкл -->
+    <!-- serverTimezone - установить timezone UTC -->
+    <!-- stringtype - значение unspecified позволяет сохранять json-строки в колонки с типом jsonb -->
+    <property name="connection.url">jdbc:postgresql://localhost:5432/demo?useSSL=false&amp;serverTimezone=UTC&amp;stringtype=unspecified</property>
+    <property name="connection.username">postgres</property>
+    <property name="connection.password">postgres</property>
+    <property name="connection.driver_class">org.postgresql.Driver</property>
+    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL10Dialect</property>
+    <property name="default_schema">bookings</property>
+    <!-- Сессия hibernate будет привязана к контексту thread - сессия завершается после завершения потока -->
+    <property name="hibernate.current_session_context_class">thread</property>
+    <!-- Когда Hibernate должен освобождать JDBC-соединения -->
+    <property name="hibernate.connection.release_mode">after_transaction</property>
+    <!-- Что нужно сделать со схемой БД при инициализации; update - если были изменения,то схема обновится, а данные останутся-->
+    <property name="hibernate.hbm2ddl.auto">update</property>
+    <!-- Подключение кеша 2-уровня. Указываем реализацию кеша EhcacheRegionFactory. Примечание: включенный кеш не позволяет полностью остановить приложение -->
+    <property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.internal.EhcacheRegionFactory</property>
+    <!-- Включение статистики по SQL (используется только при отладке) -->
+    <property name="generate_statistics">false</property>
+    <!-- Логирование SQL-запросов (используется только при отладке) -->
+    <property name="format_sql">true</property>
+
+    <mapping class="entity.AirportsData"/>
+    <mapping class="entity.AircraftsData"/>
+    <mapping class="entity.Flights"/>
+    <mapping class="entity.Tickets"/>
+  </session-factory>
+</hibernate-configuration>

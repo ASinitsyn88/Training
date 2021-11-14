@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- Для конфигурирования может использоваться hibernate.cfg.xml или persistence.xml (ограничен спецификацией JPA) -->
+
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="connection.driver_class">org.h2.Driver</property>
+    <property name="connection.url">jdbc:h2:mem:test;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1;INIT=RUNSCRIPT FROM 'classpath:create.sql'\;</property>
+    <property name="connection.username">sa</property>
+    <property name="connection.password"/>
+
+    <property name="hibernate.default_schema">BOOKINGS</property>
+    <property name="connection.pool_size">1</property>
+    <property name="hibernate.dialect">org.hibernate.dialect.H2Dialect</property>
+
+    <!-- Сессия hibernate будет привязана к контексту thread - сессия завершается после завершения потока -->
+    <property name="hibernate.current_session_context_class">thread</property>
+    <!-- Когда Hibernate должен освобождать JDBC-соединения -->
+    <property name="hibernate.connection.release_mode">after_transaction</property>
+    <!-- Что нужно сделать со схемой БД при инициализации; update - если были изменения,то схема обновится, а данные останутся-->
+    <property name="hibernate.hbm2ddl.auto">create</property>
+    <!-- Логирование SQL-запросов (используется только при отладке) -->
+    <property name="show_sql">true</property>
+
+    <mapping class="entity.AirportsData"/>
+  </session-factory>
+</hibernate-configuration>

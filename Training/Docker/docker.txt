@@ -51,3 +51,4 @@ docker volume prune - удалить все volume
 docker network prune - сброс сетевых настроек
 docker-compose up -d - сборка и запуск
 docker logs --since=1h container_id - выводит логи указанного контейнера
+docker start container_id - запустить остановленный контейнер

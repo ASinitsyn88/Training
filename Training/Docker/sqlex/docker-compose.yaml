@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  postgres:
+    container_name: sqlex
+    build: MyPostgres/
+    restart: always
+    ports:
+      - 5432:5432
+    networks:
+      - postgres
+      
+  pgadmin:
+    container_name: pgadmin4
+    image: dpage/pgadmin4:latest
+    depends_on:
+      - postgres
+    ports:
+      - 5050:80
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: test1234
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    networks:
+      - postgres
+    tty: true
+
+networks:
+  postgres:
+    driver: bridge

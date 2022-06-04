@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create task</title>
+</head>
+<body>
+<form action="#" th:action="@{/api/v1/task-create}" th:object="${taskModel}" method="post">
+    <label for="description">Description</label>
+    <input type="text" required th:field="*{description}" id="description" placeholder="description">
+    <label for="completed">Checked</label>
+    <input type="checkbox" th:field="*{completed}" id="completed">
+    <br/>
+    <br/>
+    <input type="submit" value="Create Task">
+</form>
+</body>
+</html>

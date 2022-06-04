@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update task</title>
+</head>
+<body>
+<form action="#" th:action="@{/api/v1/task-update}" th:object="${task}" method="post">
+    <input hidden type="text" th:field="*{id}" id="id">
+    <label for="description">Description</label>
+    <input type="text" required th:field="*{description}" id="description" placeholder="description">
+    <label for="completed">Checked</label>
+    <input type="checkbox" th:field="*{completed}" id="completed">
+    <br/>
+    <br/>
+    <input type="submit" value="Update Task">
+</form>
+</body>
+</html>

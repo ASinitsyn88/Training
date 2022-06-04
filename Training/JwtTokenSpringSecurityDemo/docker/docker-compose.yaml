@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  postgres:
+    container_name: test_application
+    build: postgres/
+    restart: always
+    ports:
+      - 5432:5432
+    networks:
+      - postgres
+
+networks:
+  postgres:
+    driver: bridge

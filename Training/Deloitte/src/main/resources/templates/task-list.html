@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tasks</title>
+</head>
+<body>
+<form action="#" th:action="@{/api/v1/task-create}" th:object="${tasks}" method="get">
+    <div th:switch="${tasks}">
+        <h2 th:if="${#lists.isEmpty(tasks)}">No tasks found, please add new ones</h2>
+        <div th:case="*">
+            <h2>Tasks</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Modify time</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="task : ${tasks}">
+                    <td th:text="${task.description}"></td>
+                    <td th:text="${task.modifytimestamp}"></td>
+                    <td th:if="${task.completed}">&#10004;</td>
+                    <td th:unless="${task.completed}">&#8212;</td>
+                    <td></td>
+                    <td></td>
+                    <td><a th:href="@{task-update/{id}(id=${task.id})}">Edit</a></td>
+                    <td><a th:href="@{task-delete/{id}(id=${task.id})}">Delete</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <br/>
+        <br/>
+        <input type="submit" value="Create task"/>
+    </div>
+</form>
+<br/>
+<br/>
+<a href="/auth/logout">Logout</a>
+</body>
+</html>

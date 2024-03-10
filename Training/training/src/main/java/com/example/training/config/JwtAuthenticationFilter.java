@@ -22,6 +22,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private static final int JWT_TOKEN_BEGIN_INDEX = 7;
+
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
 

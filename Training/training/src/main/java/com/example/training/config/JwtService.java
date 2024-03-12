@@ -39,7 +39,7 @@ public class JwtService {
                 .compact();
     }
 
-    public boolean isTokenValid(String token, UserDetails userDetails) {
+    public boolean doesTokenBelongToUser(String token, UserDetails userDetails) {
         final String userEmail = extractUserEmailFromToken(token);
         return (userEmail.equals(userDetails.getUsername())) && !isTokenExpired(token);
     }
@@ -62,11 +62,8 @@ public class JwtService {
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts.parser()
-                .verifyWith(getSecretSignInKey())
-                .build()
-                .parseSignedClaims(token)
-                .getPayload();
+        var parser = Jwts.parser().verifyWith(getSecretSignInKey()).build();
+        return parser.parseSignedClaims(token).getPayload();
     }
 
     private SecretKey getSecretSignInKey() {

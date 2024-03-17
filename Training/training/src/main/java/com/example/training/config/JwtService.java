@@ -21,27 +21,37 @@ public class JwtService {
     @Value("${security.jwt.secret}")
     private String sha256SecretKey;
     @Value("${security.jwt.expiration-in-ms}")
-    private long validityInMilliseconds;
+    private long jwtExpirationInMs;
+    @Value("${security.jwt.refresh-token.expiration}")
+    private long refreshExpirationInMs;
 
     public String generateTokenByUserEmail(String userEmail) {
-        return generateTokenByClaimsAndUserEmail(new HashMap<>(), userEmail);
+        return generateTokenByClaimsAndUserEmail(new HashMap<>(), userEmail, jwtExpirationInMs);
     }
 
-    private String generateTokenByClaimsAndUserEmail(Map<String, Object> extraClaims, String userEmail) {
+    public String generateRefreshTokenByUserEmail(String userEmail) {
+        return generateTokenByClaimsAndUserEmail(new HashMap<>(), userEmail, refreshExpirationInMs);
+    }
+
+    public boolean doesTokenBelongToUser(String token, UserDetails userDetails) {
+        final String userEmail = extractUserEmailFromToken(token);
+        return (userEmail.equals(userDetails.getUsername())) && !isTokenExpired(token);
+    }
+
+    public String extractUserEmailFromToken(String token) {
+        return extractClaim(token, Claims::getSubject);
+    }
+
+    private String generateTokenByClaimsAndUserEmail(Map<String, Object> extraClaims, String userEmail, long expirationInMs) {
         return Jwts
                 .builder()
                 .claims().empty().add(extraClaims)
                 .and()
                 .subject(userEmail)
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + validityInMilliseconds))
+                .expiration(new Date(System.currentTimeMillis() + expirationInMs))
                 .signWith(getSecretSignInKey(), Jwts.SIG.HS256)
                 .compact();
-    }
-
-    public boolean doesTokenBelongToUser(String token, UserDetails userDetails) {
-        final String userEmail = extractUserEmailFromToken(token);
-        return (userEmail.equals(userDetails.getUsername())) && !isTokenExpired(token);
     }
 
     private boolean isTokenExpired(String token) {
@@ -50,10 +60,6 @@ public class JwtService {
 
     private Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
-    }
-
-    public String extractUserEmailFromToken(String token) {
-        return extractClaim(token, Claims::getSubject);
     }
 
     private <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {

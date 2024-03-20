@@ -51,7 +51,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                // disable cross-site request forgery protection (jwt will be used instead)
+                // disable cross-site request forgery protection (CSRF token). JWT will be used instead
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authz -> authz
                         // white list
@@ -64,6 +64,7 @@ public class SecurityConfig {
                 .sessionManagement(configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 // dao which is responsible to fetch the user details and encode password
                 .authenticationProvider(authenticationProvider())
+                // this filter is responsible for processing JWT tokens and authenticating users
                 // execute this filter before the filter called username/password authentication
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 // define logout logic

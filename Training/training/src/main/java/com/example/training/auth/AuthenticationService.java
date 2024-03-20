@@ -16,12 +16,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.io.IOException;
 import static com.example.training.token.TokenType.BEARER;
+import static com.example.training.token.TokenUtil.JWT_TOKEN_BEGIN_INDEX;
+import static com.example.training.token.TokenUtil.JWT_TOKEN_BEGIN_PART;
 
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
-    private static final int JWT_TOKEN_BEGIN_INDEX = 7;
-
     private final JwtService jwtService;
     private final UserRepository repository;
     private final TokenRepository tokenRepository;
@@ -54,10 +54,10 @@ public class AuthenticationService {
     }
 
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         final String refreshToken;
         final String userEmail;
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+        final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
+        if (authHeader == null || !authHeader.startsWith(JWT_TOKEN_BEGIN_PART)) {
             return;
         }
         refreshToken = authHeader.substring(JWT_TOKEN_BEGIN_INDEX);

@@ -5,9 +5,11 @@ JWT Mechanism:
 3. JwtAuthFilter extracts subject from token (subject is something unique, such as email)
 4. JwtAuthFilter starts validation process and calls UserDetailsService. It passes token subject
 5. UserDetailsService looks for user data in the database by token subject and return data to JwtAuthFilter
-6. JwtAuthFilter validates data from the database
-- 403 error in case user doesn't exist
-- 403 error in case the token is not valid
+6. JwtAuthFilter validates data from the database  
+- if user exists in the database
+- if email from jwt matches the email of the user from the database
+- if token is not expired
+- if token is not revoked
 7. JwtAuthFilter calls SecurityContextHolder and set this connected user
 - This way it says to Spring that this user is authenticated
 8. SecurityContextHolder calls DispatcherServlet
@@ -15,3 +17,8 @@ JWT Mechanism:
 10. controller returns response to client (Browser)
 
 ![JWT mechanism](doc/jwt_mechanism.PNG)
+
+Refresh-token Mechanism  
+- It is designed exclusively for obtaining a new access token. Refresh-token has a longer lifetime than the access token  
+- In fact, the refresh-token lifetime is the time after which the user will have to re-authenticate
+![refresh_token_mechanism](doc/refresh_token_mechanism.PNG)

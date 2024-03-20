@@ -19,4 +19,8 @@ security:
     secret: "2691e6772bb26f35efae6797cc1422644dfd26bcec748042875095aef4a3f27b"
     expiration-in-ms: 604800 # 10 minutes (# 1 minute 60000)
     refresh-token:
-      expiration: 604800000 # 7 days
+      expiration-in-ms: 604800000 # 7 days
+
+logging:
+  level:
+    org.springframework.security: TRACE

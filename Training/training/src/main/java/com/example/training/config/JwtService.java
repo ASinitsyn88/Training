@@ -14,15 +14,16 @@ import java.util.Map;
 import java.util.function.Function;
 
 /**
- * See JwtService on jwt_mechanism schema
+ * See JwtService on jwt_mechanism.PNG
  */
 @Service
 public class JwtService {
+    // It is a secret cryptographic key used to sign and verify JWT
     @Value("${security.jwt.secret}")
     private String sha256SecretKey;
     @Value("${security.jwt.expiration-in-ms}")
     private long jwtExpirationInMs;
-    @Value("${security.jwt.refresh-token.expiration}")
+    @Value("${security.jwt.refresh-token.expiration-in-ms}")
     private long refreshExpirationInMs;
 
     public String generateTokenByUserEmail(String userEmail) {

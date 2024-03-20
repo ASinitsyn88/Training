@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 /**
- * See UserDetailsService on jwt_mechanism schema
+ * See UserDetailsService on jwt_mechanism.PNG
  */
 @Service
 @RequiredArgsConstructor

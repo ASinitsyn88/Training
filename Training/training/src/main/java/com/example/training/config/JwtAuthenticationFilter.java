@@ -21,6 +21,7 @@ import static com.example.training.token.TokenUtil.JWT_TOKEN_BEGIN_PART;
 
 /**
  * See JwtAuthFilter on jwt_mechanism.PNG
+ * Designed to process all requests except /register, /authenticate, /refresh-token, /logout
  */
 @Component
 @RequiredArgsConstructor

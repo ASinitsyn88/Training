@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,6 +22,7 @@ import static com.example.training.token.TokenUtil.JWT_TOKEN_BEGIN_PART;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AuthenticationService {
     private final JwtService jwtService;
     private final UserRepository repository;
@@ -36,6 +38,7 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(request.getRole())
                 .build();
+        log.info("register user: {}", user.getEmail());
         var dbUser = repository.save(user);
         var jwt = jwtService.generateTokenByUserEmail(user.getEmail());
         var refreshToken = jwtService.generateRefreshTokenByUserEmail(user.getEmail());
@@ -44,6 +47,7 @@ public class AuthenticationService {
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
+        log.info("authentication by email: {}", request.getEmail());
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
         var dbUser = repository.findByEmail(request.getEmail()).orElseThrow();
         var jwt = jwtService.generateTokenByUserEmail(dbUser.getEmail());
@@ -62,6 +66,7 @@ public class AuthenticationService {
         }
         refreshToken = authHeader.substring(JWT_TOKEN_BEGIN_INDEX);
         userEmail = jwtService.extractUserEmailFromToken(refreshToken);
+        log.info("email {} extracted from token {}", userEmail, refreshToken);
         if (userEmail != null) {
             var user = repository.findByEmail(userEmail).orElseThrow();
             if (jwtService.doesTokenBelongToUser(refreshToken, user)) {

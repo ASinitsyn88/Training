@@ -23,4 +23,15 @@ security:
 
 logging:
   level:
-    org.springframework.security: TRACE
+    # TRACE, DEBUG, INFO, WARN, ERROR, FATAL
+    root: INFO
+    org.springframework.web: INFO
+    org.hibernate: INFO
+  charset:
+    file: UTF-8
+    console: UTF-8
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+      max-history: 10
+  file.name: D:/logs/training/training.log

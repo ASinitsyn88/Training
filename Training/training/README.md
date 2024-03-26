@@ -21,4 +21,7 @@ JWT Mechanism:
 Refresh-token Mechanism  
 - It is designed exclusively for obtaining a new access token. Refresh-token has a longer lifetime than the access token  
 - In fact, the refresh-token lifetime is the time after which the user will have to re-authenticate
-![refresh_token_mechanism](doc/refresh_token_mechanism.PNG)
+![refresh_token_mechanism](doc/refresh_token_mechanism.PNG)  
+  
+Swagger:
+http://localhost:8080/swagger-ui/index.html

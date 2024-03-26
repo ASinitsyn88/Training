@@ -26,6 +26,20 @@ import org.springframework.security.web.authentication.logout.LogoutHandler;
 @EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
+    private static final String[] WHITE_LIST_URL = {
+            "/api/v1/auth/**",
+            "/v2/api-docs",
+            "/v3/api-docs",
+            "/v3/api-docs/**",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/swagger-ui/**",
+            "/webjars/**",
+            "/swagger-ui.html"
+    };
+
     private final LogoutHandler logoutHandler;
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final UserDetailsService userDetailsService;
@@ -55,7 +69,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authz -> authz
                         // white list
-                        .requestMatchers("/api/v1/auth/**").permitAll()
+                        .requestMatchers(WHITE_LIST_URL).permitAll()
                         // any other request should be authenticated
                         .anyRequest().authenticated())
                 // secure all endpoints with HTTP Basic

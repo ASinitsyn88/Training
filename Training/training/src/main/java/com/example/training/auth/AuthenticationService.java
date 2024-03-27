@@ -70,6 +70,7 @@ public class AuthenticationService {
         if (userEmail != null) {
             var user = repository.findByEmail(userEmail).orElseThrow();
             if (jwtService.doesTokenBelongToUser(refreshToken, user)) {
+                // We must keep the same refresh-token and generate new access-token
                 var accessToken = jwtService.generateTokenByUserEmail(user.getEmail());
                 revokeAllUserTokens(user);
                 saveUserToken(user, accessToken);

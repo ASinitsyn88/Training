@@ -28,6 +28,9 @@ public class User implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
+    // _user table will not have special linking column (foreign key) to tokens
+    // but at the program level it will be associated with tokens through the user field (see Token class)
+    // orm will transform it to the List<Token>
     @OneToMany(mappedBy = "user")
     private List<Token> tokens;
 

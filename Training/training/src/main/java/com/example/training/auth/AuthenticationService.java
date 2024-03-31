@@ -52,6 +52,7 @@ public class AuthenticationService {
         var dbUser = repository.findByEmail(request.getEmail()).orElseThrow();
         var jwt = jwtService.generateTokenByUserEmail(dbUser.getEmail());
         var refreshToken = jwtService.generateRefreshTokenByUserEmail(dbUser.getEmail());
+        // User cannot have more than one active/valid token
         revokeAllUserTokens(dbUser);
         saveUserToken(dbUser, jwt);
         return AuthenticationResponse.builder().accessToken(jwt).refreshToken(refreshToken).build();
@@ -72,6 +73,7 @@ public class AuthenticationService {
             if (jwtService.doesTokenBelongToUser(refreshToken, user)) {
                 // We must keep the same refresh-token and generate new access-token
                 var accessToken = jwtService.generateTokenByUserEmail(user.getEmail());
+                // User cannot have more than one active/valid token
                 revokeAllUserTokens(user);
                 saveUserToken(user, accessToken);
                 var authResponse = AuthenticationResponse.builder().accessToken(accessToken).refreshToken(refreshToken).build();

@@ -58,7 +58,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
         // If user is not authenticated
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            // logout verification
+            // Token validation on the database side. Logout verification
             var isTokenValid = tokenRepository.findByToken(jwt)
                     .map(t -> !t.isExpired() && !t.isRevoked())
                     .orElse(false);

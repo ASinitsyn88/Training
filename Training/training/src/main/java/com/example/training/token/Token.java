@@ -29,7 +29,8 @@ public class Token {
 
     public boolean expired;
 
-    // token table will have user_id column
+    // token table will have user_id column in which it will store user identifier
+    // orm will transform it to the User class
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     public User user;

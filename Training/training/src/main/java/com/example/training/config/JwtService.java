@@ -19,12 +19,17 @@ import java.util.function.Function;
 @Service
 public class JwtService {
     // It is a secret cryptographic key used to sign and verify JWT
-    @Value("${security.jwt.secret}")
-    private String sha256SecretKey;
-    @Value("${security.jwt.expiration-in-ms}")
-    private long jwtExpirationInMs;
-    @Value("${security.jwt.refresh-token.expiration-in-ms}")
-    private long refreshExpirationInMs;
+    private final String sha256SecretKey;
+    private final long jwtExpirationInMs;
+    private final long refreshExpirationInMs;
+
+    public JwtService(@Value("${security.jwt.secret}") String sha256SecretKey,
+                      @Value("${security.jwt.expiration-in-ms}") long jwtExpirationInMs,
+                      @Value("${security.jwt.refresh-token.expiration-in-ms}") long refreshExpirationInMs) {
+        this.sha256SecretKey = sha256SecretKey;
+        this.jwtExpirationInMs = jwtExpirationInMs;
+        this.refreshExpirationInMs = refreshExpirationInMs;
+    }
 
     public String generateTokenByUserEmail(String userEmail) {
         return generateTokenByClaimsAndUserEmail(new HashMap<>(), userEmail, jwtExpirationInMs);
@@ -40,10 +45,19 @@ public class JwtService {
     }
 
     public String extractUserEmailFromToken(String token) {
+        if (token == null) {
+            throw new IllegalArgumentException("token is null");
+        }
         return extractClaim(token, Claims::getSubject);
     }
 
     private String generateTokenByClaimsAndUserEmail(Map<String, Object> extraClaims, String userEmail, long expirationInMs) {
+        if (userEmail == null || userEmail.trim().isEmpty()) {
+            throw new IllegalArgumentException("email is empty");
+        }
+        if (expirationInMs <= 0) {
+            throw new IllegalArgumentException("expirationInMs cannot be less than or equal to zero");
+        }
         return Jwts
                 .builder()
                 .claims().empty().add(extraClaims)

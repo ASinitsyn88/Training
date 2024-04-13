@@ -19,7 +19,8 @@ import java.util.List;
 @Table(schema = "public", name = "_user")
 public class User implements UserDetails {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "user_generator")
+    @SequenceGenerator(name = "user_generator", sequenceName = "_user_id_seq", allocationSize = 1)
     private Integer id;
     private String firstname;
     private String lastname;

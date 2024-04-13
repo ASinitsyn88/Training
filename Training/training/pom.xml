@@ -14,7 +14,6 @@
 
 	<groupId>com.example</groupId>
 	<artifactId>training</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>training</name>
 
 	<properties>
@@ -116,6 +115,8 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<!-- no need to use version in jar name -->
+		<finalName>${project.artifactId}</finalName>
 	</build>
 
 </project>

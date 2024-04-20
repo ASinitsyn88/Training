@@ -11,4 +11,3 @@ CREATE TABLE IF NOT EXISTS _user (
 );
 
 ALTER SEQUENCE _user_id_seq OWNED BY _user.id;
-ALTER TABLE _user OWNER TO postgres;

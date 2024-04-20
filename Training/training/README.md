@@ -25,3 +25,7 @@ Refresh-token Mechanism
   
 Swagger:
 http://localhost:8080/swagger-ui/index.html
+
+APPLICATION STARTUP PREREQUISITES
+1. Add the following system variables:
+DOCKER_HOST=tcp://localhost:2375

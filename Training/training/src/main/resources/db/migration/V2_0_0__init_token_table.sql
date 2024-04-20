@@ -12,5 +12,3 @@ CREATE TABLE IF NOT EXISTS token (
 );
 
 ALTER SEQUENCE token_id_seq OWNED BY token.id;
-ALTER TABLE token OWNER TO postgres;
-

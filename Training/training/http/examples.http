@@ -1,0 +1,32 @@
+### Register
+POST http://localhost:8080/api/v1/auth/register
+Content-Type: application/json
+
+{
+  "firstname": "Alexander",
+  "lastname": "Sinitsyn",
+  "email": "email@gmail.com",
+  "password": "1234",
+  "role": "USER"
+}
+
+### Authenticate
+POST http://localhost:8080/api/v1/auth/authenticate
+Content-Type: application/json
+
+{
+  "email": "email@gmail.com",
+  "password": "1234"
+}
+
+### Refresh-token (get access token by refresh token)
+POST http://localhost:8080/api/v1/auth/refresh-token
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbWFpbEBnbWFpbC5jb20iLCJpYXQiOjE3MTQ1MDcyNTEsImV4cCI6MTcxNTExMjA1MX0.A3ZcStOOAT5LB96vnLIMBCv2xHmiF7V6qql93sl9fdY
+
+### Logout (by access token)
+GET http://localhost:8080/api/v1/auth/logout
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbWFpbEBnbWFpbC5jb20iLCJpYXQiOjE3MTQ1MDcyODYsImV4cCI6MTcxNDUwNzg5MX0.HiHNDYR80blf8saGWIomMhE2JZi16VlwxQHWlQ_LLRQ","refresh_token":"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbWFpbEBnbWFpbC5jb20iLCJpYXQiOjE3MTQ1MDcyNTEsImV4cCI6MTcxNTExMjA1MX0.A3ZcStOOAT5LB96vnLIMBCv2xHmiF7V6qql93sl9fdY
+
+### Demo endpoint
+GET http://localhost:8080/api/v1/demo-controller
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbWFpbEBnbWFpbC5jb20iLCJpYXQiOjE3MTQ1MDc1NDgsImV4cCI6MTcxNDUwODE1M30.CFuV_Y1xAmle7B8_Y9q9L0VQnxECPHajID4cbWtOOHk

@@ -3,4 +3,4 @@ server:
   port: 8080
 spring:
   profiles:
-    active: docker
+    active: local

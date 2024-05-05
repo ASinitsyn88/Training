@@ -8,21 +8,20 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class JwtServiceTest {
-    private static String sha256SecretKey;
-    private static long jwtExpirationInMs;
-    private static long refreshExpirationInMs;
+    private static JwtConfig jwtConfig;
 
     @BeforeAll
     static void setUp() {
-        sha256SecretKey = "2691e6772bb26f35efae6797cc1422644dfd26bcec748042875095aef4a3f27b";
-        jwtExpirationInMs = 604800;
-        refreshExpirationInMs = 604800000;
+        String sha256SecretKey = "2691e6772bb26f35efae6797cc1422644dfd26bcec748042875095aef4a3f27b";
+        long jwtExpirationInMs = 604800;
+        long refreshExpirationInMs = 604800000;
+        jwtConfig = new JwtConfig(sha256SecretKey, jwtExpirationInMs, new RefreshToken(refreshExpirationInMs));
     }
 
     @Test
     void generateTokenByUserEmail_NotNull_Test() {
         // Given
-        JwtService jwtService = new JwtService(sha256SecretKey, jwtExpirationInMs, refreshExpirationInMs);
+        JwtService jwtService = new JwtService(jwtConfig);
         // When
         String token = jwtService.generateTokenByUserEmail("myemail@gmail.com");
         // Then
@@ -32,7 +31,7 @@ class JwtServiceTest {
     @Test
     void generateTokenByUserEmail_Null_Test() {
         // Given
-        JwtService jwtService = new JwtService(sha256SecretKey, jwtExpirationInMs, refreshExpirationInMs);
+        JwtService jwtService = new JwtService(jwtConfig);
         // When
         String errMsg = assertThrows(IllegalArgumentException.class, () -> jwtService.generateTokenByUserEmail(null)).getMessage();
         // Then
@@ -42,7 +41,11 @@ class JwtServiceTest {
     @Test
     void generateTokenByUserEmail_Expiration_Zero_Test() {
         // Given
-        JwtService jwtService = new JwtService(sha256SecretKey, 0, refreshExpirationInMs);
+        String sha256SecretKey = "2691e6772bb26f35efae6797cc1422644dfd26bcec748042875095aef4a3f27b";
+        long jwtExpirationInMs = 0;
+        long refreshExpirationInMs = 604800000;
+        JwtConfig jwtConfig = new JwtConfig(sha256SecretKey, jwtExpirationInMs, new RefreshToken(refreshExpirationInMs));
+        JwtService jwtService = new JwtService(jwtConfig);
         // When
         String errMsg = assertThrows(IllegalArgumentException.class, () -> jwtService.generateTokenByUserEmail("myemail@gmail.com")).getMessage();
         // Then
@@ -52,7 +55,7 @@ class JwtServiceTest {
     @Test
     void generateRefreshTokenByUserEmail_NotNull_Test() {
         // Given
-        JwtService jwtService = new JwtService(sha256SecretKey, jwtExpirationInMs, refreshExpirationInMs);
+        JwtService jwtService = new JwtService(jwtConfig);
         // When
         String token = jwtService.generateRefreshTokenByUserEmail("myemail@gmail.com");
         // Then
@@ -62,7 +65,7 @@ class JwtServiceTest {
     @Test
     void generateRefreshTokenByUserEmail_Null_Test() {
         // Given
-        JwtService jwtService = new JwtService(sha256SecretKey, jwtExpirationInMs, refreshExpirationInMs);
+        JwtService jwtService = new JwtService(jwtConfig);
         // When
         String errMsg = assertThrows(IllegalArgumentException.class, () -> jwtService.generateRefreshTokenByUserEmail(null)).getMessage();
         // Then
@@ -72,7 +75,11 @@ class JwtServiceTest {
     @Test
     void generateRefreshTokenByUserEmail_Expiration_Zero_Test() {
         // Given
-        JwtService jwtService = new JwtService(sha256SecretKey, jwtExpirationInMs, 0);
+        String sha256SecretKey = "2691e6772bb26f35efae6797cc1422644dfd26bcec748042875095aef4a3f27b";
+        long jwtExpirationInMs = 604800;
+        long refreshExpirationInMs = 0;
+        JwtConfig jwtConfig = new JwtConfig(sha256SecretKey, jwtExpirationInMs, new RefreshToken(refreshExpirationInMs));
+        JwtService jwtService = new JwtService(jwtConfig);
         // When
         String errMsg = assertThrows(IllegalArgumentException.class, () -> jwtService.generateRefreshTokenByUserEmail("myemail@gmail.com")).getMessage();
         // Then
@@ -83,7 +90,7 @@ class JwtServiceTest {
     void doesTokenBelongToUser_Belongs_Test() {
         // Given
         String userEmail = "myemail@gmail.com";
-        JwtService jwtService = new JwtService(sha256SecretKey, jwtExpirationInMs, refreshExpirationInMs);
+        JwtService jwtService = new JwtService(jwtConfig);
         String token = jwtService.generateTokenByUserEmail(userEmail);
         // Mock the calls
         UserDetails userDetailsMock = mock(UserDetails.class);
@@ -98,7 +105,7 @@ class JwtServiceTest {
     void doesTokenBelongToUser_Does_Not_Belong_Test() {
         // Given
         String userEmail = "myemail@gmail.com";
-        JwtService jwtService = new JwtService(sha256SecretKey, jwtExpirationInMs, refreshExpirationInMs);
+        JwtService jwtService = new JwtService(jwtConfig);
         String token = jwtService.generateTokenByUserEmail(userEmail);
         // Mock the calls
         UserDetails userDetailsMock = mock(UserDetails.class);
@@ -113,7 +120,7 @@ class JwtServiceTest {
     void doesTokenBelongToUser_Null_Test() {
         // Given
         String userEmail = null;
-        JwtService jwtService = new JwtService(sha256SecretKey, jwtExpirationInMs, refreshExpirationInMs);
+        JwtService jwtService = new JwtService(jwtConfig);
         // Mock the calls
         UserDetails userDetailsMock = mock(UserDetails.class);
         // When
@@ -124,7 +131,7 @@ class JwtServiceTest {
     void extractUserEmailFromToken_Test() {
         // Given
         String userEmail = "myemail@gmail.com";
-        JwtService jwtService = new JwtService(sha256SecretKey, jwtExpirationInMs, refreshExpirationInMs);
+        JwtService jwtService = new JwtService(jwtConfig);
         String token = jwtService.generateTokenByUserEmail(userEmail);
         // When
         String extractedUserEmail = jwtService.extractUserEmailFromToken(token);
@@ -136,7 +143,7 @@ class JwtServiceTest {
     void extractUserEmailFromToken_Null_Test() {
         // Given
         String token = null;
-        JwtService jwtService = new JwtService(sha256SecretKey, jwtExpirationInMs, refreshExpirationInMs);
+        JwtService jwtService = new JwtService(jwtConfig);
         // When
         String errMsg = assertThrows(IllegalArgumentException.class, () -> jwtService.extractUserEmailFromToken(token)).getMessage();
         // Then

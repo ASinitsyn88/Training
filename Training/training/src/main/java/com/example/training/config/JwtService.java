@@ -4,7 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import javax.crypto.SecretKey;
@@ -16,27 +16,22 @@ import java.util.function.Function;
 /**
  * See JwtService on jwt_mechanism.PNG
  */
+@EnableConfigurationProperties({JwtConfig.class, RefreshToken.class})
 @Service
 public class JwtService {
     // It is a secret cryptographic key used to sign and verify JWT
-    private final String sha256SecretKey;
-    private final long jwtExpirationInMs;
-    private final long refreshExpirationInMs;
+    private final JwtConfig jwtConfig;
 
-    public JwtService(@Value("${security.jwt.secret}") String sha256SecretKey,
-                      @Value("${security.jwt.expiration-in-ms}") long jwtExpirationInMs,
-                      @Value("${security.jwt.refresh-token.expiration-in-ms}") long refreshExpirationInMs) {
-        this.sha256SecretKey = sha256SecretKey;
-        this.jwtExpirationInMs = jwtExpirationInMs;
-        this.refreshExpirationInMs = refreshExpirationInMs;
+    public JwtService(JwtConfig jwtConfig) {
+        this.jwtConfig = jwtConfig;
     }
 
     public String generateTokenByUserEmail(String userEmail) {
-        return generateTokenByClaimsAndUserEmail(new HashMap<>(), userEmail, jwtExpirationInMs);
+        return generateTokenByClaimsAndUserEmail(new HashMap<>(), userEmail, jwtConfig.expirationInMs());
     }
 
     public String generateRefreshTokenByUserEmail(String userEmail) {
-        return generateTokenByClaimsAndUserEmail(new HashMap<>(), userEmail, refreshExpirationInMs);
+        return generateTokenByClaimsAndUserEmail(new HashMap<>(), userEmail, jwtConfig.refreshToken().expirationInMs());
     }
 
     public boolean doesTokenBelongToUser(String token, UserDetails userDetails) {
@@ -88,6 +83,6 @@ public class JwtService {
     }
 
     private SecretKey getSecretSignInKey() {
-        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(sha256SecretKey));
+        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtConfig.secret()));
     }
 }

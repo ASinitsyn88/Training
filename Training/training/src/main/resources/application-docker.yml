@@ -37,3 +37,13 @@ logging:
       max-file-size: 10MB
       max-history: 10
   file.name: /logs/training.log
+
+# spring boot actuator
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"

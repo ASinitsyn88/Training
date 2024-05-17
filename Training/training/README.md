@@ -26,6 +26,11 @@ Refresh-token Mechanism
 Swagger:
 http://localhost:8080/swagger-ui/index.html
 
+Spring-Batch:  
+![refresh_token_mechanism](doc/spring_batch.PNG)  
+![refresh_token_mechanism](doc/spring_batch2.PNG)  
+![refresh_token_mechanism](doc/spring_batch3.PNG)  
+
 APPLICATION STARTUP PREREQUISITES
 1. Add the following system variables:
 DOCKER_HOST=tcp://localhost:2375

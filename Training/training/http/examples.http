@@ -37,3 +37,8 @@ Authorization: Basic sinitsyn288@gmail.com 1234
 
 ### swagger-ui
 GET http://localhost:8080/swagger-ui/index.html
+
+### Student batch processing
+POST http://localhost:8080/api/v1/batch/students
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaW5pdHN5bjg4QGdtYWlsLmNvbSIsImlhdCI6MTcxNTg2MzEzMiwiZXhwIjoxNzE1ODYzNzM3fQ.k9hInxyFdDUVgfoW076eVmrVGxFzg8bS9-61HCjfjzY

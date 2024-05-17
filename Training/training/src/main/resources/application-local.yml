@@ -15,6 +15,13 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   flyway:
     enabled: true
+  batch:
+    jdbc:
+      # create batch technical tables automatically
+      initialize-schema: always
+    job:
+      # we will call job execution manually
+      enabled: false
 
 security:
   jwt:

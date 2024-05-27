@@ -42,3 +42,13 @@ GET http://localhost:8080/swagger-ui/index.html
 POST http://localhost:8080/api/v1/batch/students
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaW5pdHN5bjg4QGdtYWlsLmNvbSIsImlhdCI6MTcxNTg2MzEzMiwiZXhwIjoxNzE1ODYzNzM3fQ.k9hInxyFdDUVgfoW076eVmrVGxFzg8bS9-61HCjfjzY
+
+### Add value to account balance
+POST http://localhost:8080/api/v1/account/balance
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaW5pdHN5bjg4QGdtYWlsLmNvbSIsImlhdCI6MTcxNjU4NzY1OSwiZXhwIjoxNzE2NTg4MjYzfQ.ebtPjCc3hrN5bRBZd73RoIg2xc9x-nVmfZtknytYiMw
+
+{
+  "accountId": 1,
+  "valueToAdd": 100
+}

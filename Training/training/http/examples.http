@@ -52,3 +52,24 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaW5pdHN5bjg4QGdtYWlsLmNvb
   "accountId": 1,
   "valueToAdd": 100
 }
+
+### Get all books
+GET http://localhost:8080/api/v1/books
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbWFpbEBnbWFpbC5jb20iLCJpYXQiOjE3MTQ1MDc1NDgsImV4cCI6MTcxNDUwODE1M30.CFuV_Y1xAmle7B8_Y9q9L0VQnxECPHajID4cbWtOOHk
+
+### Get book by isbn
+GET http://localhost:8080/api/v1/books/978-1-2345-6780-1
+
+### Save book (rollback example)
+PUT http://localhost:8080/api/v1/books/978-1-2345-1111-1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaW5pdHN5bjg4QGdtYWlsLmNvbSIsImlhdCI6MTcxNjU4NzY1OSwiZXhwIjoxNzE2NTg4MjYzfQ.ebtPjCc3hrN5bRBZd73RoIg2xc9x-nVmfZtknytYiMw
+
+{
+  "isbn": "978-1-2345-6780-1",
+  "title": "TEST BOOK",
+  "author": {
+    "name": "This is very long author name!!!",
+    "age": 70
+  }
+}

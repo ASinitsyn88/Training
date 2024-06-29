@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Entity
+@Entity(name = "bookAuthor") // Set unique entity name because there are different entities with the same name
 @Table(name = "authors")
 public class Author {
     @Id

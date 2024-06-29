@@ -1,22 +1,18 @@
 package com.example.training.elearning.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@SuperBuilder
 @Entity
 @Table(schema = "e_learning", name = "course")
-public class Course {
-    @Id
-    @GeneratedValue
-    private Integer id;
+public class Course extends BaseEntity {
     private String name;
     private String description;
 

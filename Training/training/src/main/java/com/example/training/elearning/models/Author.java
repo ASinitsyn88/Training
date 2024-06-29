@@ -1,21 +1,18 @@
 package com.example.training.elearning.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@SuperBuilder
 @Entity(name = "courseAuthor") // Set unique entity name because there are different entities with the same name
 @Table(schema = "e_learning", name = "author")
-public class Author {
-    @Id
-    @GeneratedValue
+public class Author extends BaseEntity {
     private String firstName;
     private String lastName;
     @Column(unique = true, nullable = false)

@@ -4,14 +4,18 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
 @Entity
 @Table(schema = "e_learning", name = "resource")
-public class Resource extends BaseEntity {
+// It will include all child/inherited class properties to this class
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public class Resource {
+    @Id
+    @GeneratedValue
+    private Integer id;
     private String name;
     private int size;
     private String url;

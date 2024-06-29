@@ -1,4 +1,4 @@
-package com.example.training.elearning.models;
+package com.example.training.elearning.model;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -12,6 +12,9 @@ import lombok.experimental.SuperBuilder;
 @Table(schema = "e_learning", name = "resource")
 // It will include all child/inherited class properties to this class
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+// Table will have resource_type column
+// and it will contain the value depending on @DiscriminatorValue
+@DiscriminatorColumn(name = "resource_type")
 public class Resource {
     @Id
     @GeneratedValue

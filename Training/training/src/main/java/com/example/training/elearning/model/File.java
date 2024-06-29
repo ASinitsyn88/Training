@@ -1,5 +1,6 @@
-package com.example.training.elearning.models;
+package com.example.training.elearning.model;
 
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,6 +14,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 @Entity
-public class Video extends Resource {
-    private int length;
+@DiscriminatorValue("F")
+public class File extends Resource {
+    private String type;
 }

@@ -1,4 +1,4 @@
-package com.example.training.elearning.models;
+package com.example.training.elearning.model;
 
 import jakarta.persistence.*;
 import lombok.*;

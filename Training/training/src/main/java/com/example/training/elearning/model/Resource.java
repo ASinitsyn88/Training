@@ -10,10 +10,16 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @Entity
 @Table(schema = "e_learning", name = "resource")
-// It will include all child/inherited class properties to this class
+// Separate tables will not be created for child classes (See: Video.java, Text.java, File.java)
+// Child class properties will be included to this parent class => 'resource' table
+// If you want to create separate tables per each child class (See: Video.java, Text.java, File.java) then can use:
+// 1. @Inheritance(strategy = InheritanceType.InheritanceType.JOINED) without @DiscriminatorColumn
+// Tables will be created for both parent and child classes. Children will not include fields of the parent class
+// 2. @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) without @DiscriminatorColumn
+// Tables will be created for both parent and child classes. Children will include fields of the parent class
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 // Table will have resource_type column
-// and it will contain the value depending on @DiscriminatorValue
+// and it will contain the value depending on @DiscriminatorValue in child classes
 @DiscriminatorColumn(name = "resource_type")
 public class Resource {
     @Id

@@ -1,5 +1,6 @@
 package com.example.training.elearning.model.embedded;
 
+import jakarta.persistence.Embedded;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -16,6 +17,8 @@ public class Order {
     // Composite key example
     @EmbeddedId
     private OrderId id;
+    @Embedded
+    private Address address;
     private String orderInfo;
     private String anotherField;
 }

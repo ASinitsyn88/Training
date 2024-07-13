@@ -1,7 +1,10 @@
 package com.example.training.elearning.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import java.util.List;
 
@@ -12,6 +15,16 @@ import java.util.List;
 @SuperBuilder
 @Entity(name = "courseAuthor") // Set unique entity name because there are different entities with the same name
 @Table(schema = "e_learning", name = "author")
+@NamedQueries({
+        @NamedQuery(
+                name = "Author.findByNamedQuery",
+                query = "select a from com.example.training.elearning.model.Author a where a.age >= :age"
+        ),
+        @NamedQuery(
+                name = "Author.updateByNamedQuery",
+                query = "update com.example.training.elearning.model.Author a set a.age = :age"
+        )
+})
 public class Author extends BaseEntity {
     private String firstName;
     private String lastName;

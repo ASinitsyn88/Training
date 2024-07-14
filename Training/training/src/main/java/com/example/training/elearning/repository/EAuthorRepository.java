@@ -1,16 +1,15 @@
 package com.example.training.elearning.repository;
 
 import com.example.training.elearning.model.Author;
-import jakarta.persistence.NamedQuery;
 import jakarta.transaction.Transactional;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
-
 import java.util.List;
 
-public interface EAuthorRepository extends CrudRepository<Author, Integer> {
+public interface EAuthorRepository extends CrudRepository<Author, Integer>, JpaSpecificationExecutor<Author> {
     @Transactional
     List<Author> findByNamedQuery(@Param("age") int age); // Named query
 

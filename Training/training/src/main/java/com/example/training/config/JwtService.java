@@ -15,6 +15,7 @@ import java.util.function.Function;
 
 /**
  * See JwtService on jwt_mechanism.PNG
+ * It generates the token, decodes the token, extracts the information from the token, validates the token etc.
  */
 @EnableConfigurationProperties({JwtConfig.class, RefreshToken.class})
 @Service

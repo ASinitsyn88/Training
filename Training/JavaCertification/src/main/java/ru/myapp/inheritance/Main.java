@@ -27,6 +27,6 @@ public class Main {
         SuperClass c = new SubClass();
         System.out.println(c.msg()); // Hello from SubClass
         System.out.println(c.message); // SuperClass
-        //c.msg2(); // Doesn't compile
+        //c.msg2(); // Doesn't compile. It will compile only if SubClass c = new SubClass();
     }
 }

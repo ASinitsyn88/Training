@@ -1,7 +1,7 @@
 package ru.myapp.exercise;
 
 import java.util.HashMap;
-import java.util.Map;
+import java.util.Stack;
 
 public class ValidParentheses {
 
@@ -12,9 +12,10 @@ public class ValidParentheses {
     }};
 
     public static void main(String[] args) {
-        String str = "()[]{}";
+        //String str = "()()";
+        //String str = "()[]{}";
         //String str = "()";
-        //String str = "([])";
+        String str = "([])";
         //String str = "(]";
         //String str = "([]))";
         boolean isValid = ValidParentheses.isValid(str);
@@ -22,39 +23,18 @@ public class ValidParentheses {
     }
 
     public static boolean isValid(String s) {
-        char[] chars = s.toCharArray();
-        for (Map.Entry<Character, Character> entry : map.entrySet()) {
-            boolean theSameNumberOfTimes = arePresentedTheSameNumberOfTimes(entry.getKey(), entry.getValue(), chars);
-            if (!theSameNumberOfTimes) {
+        Stack<Character> stack = new Stack<Character>();
+        for (char c : s.toCharArray()) {
+            if (c == '(')
+                stack.push(')');
+            else if (c == '{')
+                stack.push('}');
+            else if (c == '[')
+                stack.push(']');
+            else if (stack.isEmpty() || stack.pop() != c)
                 return false;
-            }
         }
-
-        boolean isAllClosed = false;
-        // opened char loop
-        for (int i = 0; i < chars.length; i++) {
-            char start = chars[i];
-            Character end = map.get(start);
-            if (end == null) {
-                // 'start' is closed char and can't be processed
-                continue;
-            }
-
-            // closed char loop
-            for (int k = i; k < chars.length; k++) {
-                char closed = chars[k];
-                if (end == closed) {
-                    isAllClosed = true;
-                    break;
-                }
-                isAllClosed = false;
-            }
-
-            if (!isAllClosed) {
-                return false;
-            }
-        }
-        return isAllClosed;
+        return stack.isEmpty();
     }
 
     private static boolean arePresentedTheSameNumberOfTimes(Character start, Character end, char[] chars) {
